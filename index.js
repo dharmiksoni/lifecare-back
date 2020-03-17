@@ -19,4 +19,4 @@ app.get('/', (req, res) => {
 
 app.use('/api', lifeCareRouter);
 
-app.listen(apiPort, () => console.log(`server is running on port ${apiPort}`));
+app.listen(process.env.PORT || apiPort, () => console.log(`server is running on port ${process.env.PORT || apiPort}`));

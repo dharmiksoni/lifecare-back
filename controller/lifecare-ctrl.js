@@ -1,4 +1,6 @@
-const LifeCare = require("../models/lifecare_model");
+const LifeCare = require('../models/lifecare_model');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 // createLocation = async (req, res) => {
 //   const body = req.body;
@@ -36,18 +38,23 @@ const LifeCare = require("../models/lifecare_model");
 // };
 
 getLocation = async (req, res) => {
-  await LifeCare.find({}, (err, life) => {
-    console.log("life", life);
+
+  let {
+    locationId
+  } = req.body;
+
+  await LifeCare.findById({ locationId: locationId }, (err, life) => {
+    // console.log('life', life);
     if (err) {
       return res.status(400).json({ success: false, error: err });
     }
-    if (!life.length) {
-      return res.status(404).json({ success: false, error: "data not found" });
-    }
 
-    return res.status(200).json({ success: true, data: life });
+    if (!life) {
+      return res.status(404).json({ success: false, error: 'data not found' });
+    } else {
+      return res.status(200).json({ success: true, data: life });
+    }
   }).catch(err => console.log(err));
 };
 
-
-module.exports = {getLocation};
+module.exports = { getLocation };

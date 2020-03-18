@@ -38,12 +38,11 @@ const ObjectId = mongoose.Types.ObjectId;
 // };
 
 getLocation = async (req, res) => {
+  // let {
+  //   locationId
+  // } = req.body;
 
-  let {
-    locationId
-  } = req.body;
-
-  await LifeCare.findById({ locationId: locationId }, (err, life) => {
+  await LifeCare.find({}, (err, life) => {
     // console.log('life', life);
     if (err) {
       return res.status(400).json({ success: false, error: err });
@@ -56,5 +55,21 @@ getLocation = async (req, res) => {
     }
   }).catch(err => console.log(err));
 };
+
+// allLocation = async (req, res) => {
+
+//   await LifeCare.find({}, (err, life) => {
+//     // console.log('life', life);
+//     if (err) {
+//       return res.status(400).json({ success: false, error: err });
+//     }
+
+//     if (!life) {
+//       return res.status(404).json({ success: false, error: 'data not found' });
+//     } else {
+//       return res.status(200).json({ success: true, data: life });
+//     }
+//   }).catch(err => console.log(err));
+// };
 
 module.exports = { getLocation };

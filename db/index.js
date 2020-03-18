@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/lifecare', {useNewUrlParser: true})
+mongoose.connect('mongodb+srv://anantl:lifecare123@cluster0-qxcvn.mongodb.net/lifecare?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
     .then(res => {
         console.log("DB connected!");
         
